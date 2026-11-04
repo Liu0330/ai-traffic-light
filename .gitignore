@@ -1,0 +1,12 @@
+/target/
+/.idea/
+/.vscode/
+*.pdb
+*.user
+*.log
+/preview*.png
+notifications.json
+native-position.txt
+.DS_Store
+Thumbs.db
+

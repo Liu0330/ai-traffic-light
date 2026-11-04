@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Check formatting
+        run: cargo fmt --check
+      - name: Check
+        run: cargo check --locked
+      - name: Build release
+        run: cargo build --release --locked
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-traffic-light-windows-x64
+          path: target/release/ai-traffic-light.exe
+          if-no-files-found: error
+
